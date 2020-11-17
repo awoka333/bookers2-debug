@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
-  before_action :ensure_correct_user, only:[:edit, :update]
+  before_action :authenticate_user!
+  before_action :ensure_correct_user, only:[:edit, :update, :destroy]
 
   def show
     @book = Book.new
@@ -35,10 +36,10 @@ class BooksController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @book = Book.find(params[:id])
-    @book.destoy
-    redirect_to books_path
+    @book.destroy
+    redirect_to books_path, notice: "successfully delete book!"
   end
 
 
