@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'search/search'
   get 'home/about'
   get 'home/top'
   devise_for :users
@@ -13,4 +14,5 @@ Rails.application.routes.draw do
   post 'unfollow/:id' => 'relationships#destroy', as: 'unfollow'
   get 'followed/:id' => 'relationships#followed', as: 'followed'
   get 'follower/:id' => 'relationships#follower', as: 'follower'
+  get 'search' => 'search#search'
 end

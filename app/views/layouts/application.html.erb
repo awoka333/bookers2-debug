@@ -12,6 +12,21 @@
 
   <body>
     <%= render 'layouts/header' %>
+    
+    <% if user_signed_in? %>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <%= form_with url: search_path, method: :get, local: true do |f| %>
+              <%= f.text_field :word %>
+              <%= f.select :model_name, [['User', 1], ['Book', 2]], { selected: 1 }, {} %>
+              <%= f.select :how, [['完全一致', 1], ['前方一致', 2], ['後方一致', 3], ['部分一致', 4]], { selected: 1 }, {} %>
+              <%= f.submit "検索" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
 
     <div class="container">
       <p id="notice"><%= notice %></p>

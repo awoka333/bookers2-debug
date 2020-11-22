@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-md-9 col-md-offset-2">
+        <% if @model_name == '1' %>
+            <h1>Users search for '<%= @word %>'</h1>
+            <% unless @user.count == 0 %>
+                <table class="table table-hover table-inverse">
+                    <thead>
+				        <tr>
+					        <th>image</th>
+					        <th>name</th>
+					        <th colspan="5"></th>
+				        </tr>
+			        </thead>
+
+			        <tbody>
+				        <% @user.each do |user| %>
+				        <tr>
+					        <td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
+					        <td><%= user.name %></td>
+					        <td><span>フォロー数：<%= user.follower.count %></span></td>
+					        <td><span>フォロワー数：<%= user.followed.count %></span></td>
+					        <td><%= link_to "Show", user_path(user), class: "user_#{user.id}" %></td>
+				        </tr>
+				        <% end %>
+			        </tbody>
+                </table>
+            <% else %>
+                <span>該当するユーザーはいません</span>
+            <% end %>
+            
+        <% else %>
+            <h1>Books search for '<%= @word %>'</h1>
+            <% unless @book.count == 0 %>
+                <table class="table table-hover table-inverse">
+                    <thead>
+				        <tr>
+					        <th colspan="1"></th>
+					        <th>Title</th>
+					        <th>Opinion</th>
+				        </tr>
+			        </thead>
+
+			        <tbody>
+				        <% @book.each do |book| %>
+				        <tr>
+					        <td>
+					            <%= link_to user_path(book.user) do %>
+							        <%= attachment_image_tag(book.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
+						        <% end %>
+						    </td>
+					        <td><%= link_to book.title, book_path(book), class: "book_#{book.id}" %></td>
+					        <td><%= book.body %></td>
+				        </tr>
+				        <% end %>
+			        </tbody>
+                </table>
+            <% else %>
+                <span>該当する本はありません</span>
+            <% end %>
+        <% end %>
+    </div>
+</div>

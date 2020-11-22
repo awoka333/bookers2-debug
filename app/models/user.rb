@@ -28,4 +28,18 @@ class User < ApplicationRecord
     following_user.include?(user)
 	end
 	
+	def self.search(how, word)
+    if how == "1"
+      @user = User.where("#{word}")
+    elsif how == "2"
+      @user = User.where("name LIKE ?", "#{word}%")
+    elsif how == "3"
+      @user = User.where("name LIKE ?", "%#{word}")
+    elsif how == "4"
+      @user = User.where("name LIKE ?", "%#{word}%")
+    else
+      @user = User.all
+    end
+  end
+  
 end
