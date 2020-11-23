@@ -1,0 +1,13 @@
+<% if book_detail.favorited_by?(current_user) %>
+	<li style="list-style:none;">
+  		<%= link_to book_favorites_path(book_detail), method: :delete, remote: true, class: "favorite" do %>
+    		<i class="fa fa-heart" aria-hidden="true" style="color: red;"><%= book_detail.favorites.count %></i>
+  		<% end %>
+	</li>
+	<% else %>
+	<li style="list-style:none;">
+  		<%= link_to book_favorites_path(book_detail), method: :post, remote: true, class: "favorite" do %>
+    		<i class="far fa-heart" aria-hidden="true"><%= book_detail.favorites.count %></i>
+  		<% end %>
+	</li>
+<% end %>
