@@ -1,7 +1,7 @@
 <% book_comments.each do |comment| %>
 	<tr>
 		<td>
-			<%= link_to user_path(comment.user), remote: true do %>
+			<%= link_to user_path(comment.user), local: true do %>
 				<%= attachment_image_tag(comment.user, :profile_image, :fill, 60, 60, fallback: "no-image-mini.jpg") %><br>
 				<%= comment.user.name %>
 			<% end %>
